@@ -1,0 +1,61 @@
+<!-- Main content -->
+<div class="content-wrapper">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>User Edit</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">Edit</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title"><%= @user.email %></h3>
+            </div>
+            <div class="card-body">
+              <% if flash[:errors] %>
+                <% flash[:errors].each do |error| %>
+                  <p style="color: red"><%= error %></p>
+                <%end%>
+              <%end%>
+              <%= form_for @user, url: { action: "update" } do %>
+                <div class="form-group">
+                  <label> First Name</label>
+                  <%= text_field 'user' ,'f_name', :class => 'form-control', placeholder:'First Name', :value =>@user.f_name %>
+                </div>
+                <div class="form-group">
+                  <label> Last Name</label>
+                  <%= text_field 'user' ,'l_name', :class => 'form-control', placeholder:'Last Name', :value =>@user.l_name %>
+                </div>
+                <div class="form-group">
+                  <label> User Name</label>
+                  <%= text_field 'user' ,'user_name', :class => 'form-control', placeholder:'User Name', :value =>@user.user_name %>
+                </div>
+                <div class="form-group">
+                  <label>Email</label>
+                  <%= text_field 'user' ,'email', :class => 'form-control',:value =>@user.email %>
+                </div>
+                <div class="form-group">
+                  <label>Phone</label>
+                  <%= text_field 'user','mobile', :class => 'form-control', placeholder:'Phone', :value =>@user.mobile %>
+                </div>
+              <%= submit_tag "Update", class: 'btn btn-block btn-secondary' %>
+              <% end -%>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+

@@ -1,0 +1,57 @@
+<!-- Main content -->
+<div class="content-wrapper">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Article Edit</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">Edit</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title"><%= @article.title %></h3>
+            </div>
+            <div class="card-body">
+              <% if flash[:errors] %>
+                <% flash[:errors].each do |error| %>
+                  <p style="color: red"><%= error %></p>
+                <%end%>
+              <%end%>
+              <%= form_for @article, url: { action: "update" } do %>
+                <div class="form-group">
+                  <label>Title</label>
+                  <%= text_field 'article' ,'title', :class => 'form-control',:value =>@article.title %>
+                </div>
+                <div class="form-group">
+                  <label>Category</label>
+                  <%= select_tag 'article[catagories_id]', options_from_collection_for_select(@catagories, 'id', 'title', @article.catagories_id),:class => 'form-control' %>
+                </div>
+                <div class="form-group">
+                  <label>Slug</label>
+                  <%= text_field 'article','slug', :class => 'form-control', :value =>@article.slug %>
+                </div>
+                <div class="form-group">
+                  <label>Content</label>
+                  <%= text_area 'article','content',class:'summernote', 'data-provider': :summernote, :value =>@article.content %>
+                </div>
+              <%= submit_tag "Update", class: 'btn btn-block btn-secondary' %>
+              <% end -%>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
