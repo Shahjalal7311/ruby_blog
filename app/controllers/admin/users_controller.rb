@@ -29,7 +29,7 @@ class Admin::UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user.update(user_update_params)
+    if @user.update(user_params)
       redirect_to :action =>'index'
     else
       render :action => 'edit'
@@ -39,11 +39,6 @@ class Admin::UsersController < ApplicationController
   def destroy
     User.find(params[:id]).destroy
     redirect_to :action => 'index'
-  end
-
-  def user_update_params
-    # render json: params
-    params.require(:user).permit(:f_name,:l_name,:user_name, :email, :mobile)
   end
 
   def user_params
