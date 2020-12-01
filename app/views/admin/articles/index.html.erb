@@ -32,6 +32,7 @@
                     <th>#ID</th>
                     <th>Title</th>
                     <th>Slug</th>
+                    <th>Images</th>
                     <th>Category</th>
                     <th>Create Date</th>
                     <th>Action</th>
@@ -43,6 +44,9 @@
                     <td><%= article.id %></td>
                     <td><%= article.title %></td>
                     <td width="20%"><%= strip_html_tags(article.slug) %></td>
+                    <td>
+                      <img width="50" src="<%= article.attachment %>" class="img-thumbnail" alt="<%= article.title %>" />
+                    </td>
                     <td><%= article.catagory.title %></td>
                     <td><%= article.created_at %></td>
                     <td>

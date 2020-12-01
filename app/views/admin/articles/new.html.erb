@@ -29,7 +29,7 @@
                   <p style="color: red"><%= error %></p>
                 <%end%>
               <%end%>
-              <%= form_tag :action => 'create' do %>
+              <%= form_tag({:action => :create}, :multipart => true) do %>
                 <div class="form-group">
                   <label>Title</label>
                   <%= text_field 'article' ,'title', :class => 'form-control' %>
@@ -42,6 +42,10 @@
                 <div class="form-group">
                   <label>Slug</label>
                   <%= text_field 'article','slug', :class => 'form-control' %>
+                </div>
+                <div class="form-group">
+                  <label>Images</label>
+                  <%= file_field 'article','attachment', :class => 'form-control' %>
                 </div>
                 <div class="form-group">
                   <label>Content</label>

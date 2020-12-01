@@ -10,14 +10,25 @@ class Admin::ArticlesController < ApplicationController
     @catagories = Catagory.all
   end
 
+  # def create
+  #   @article = Article.create(article_params)
+  #   if @article.valid?
+  #     params[:post_attachments]['avatar'].each do |a|
+  #     @post_attachment = @article.post_attachments.create!(:avatar => a)
+  #    end
+  #     redirect_to :action =>'index'
+  #   else
+  #     flash[:errors] =  @article.errors.full_messages
+  #     redirect_to :action =>'new'
+  #   end  
+  # end
   def create
-    @article = Article.create(article_params)
-    if @article.valid?
+    @article = Article.new(article_params)
+    if @article.save
       redirect_to :action =>'index'
     else
-      flash[:errors] =  @article.errors.full_messages
       redirect_to :action =>'new'
-    end  
+    end
   end
 
   def show
@@ -30,7 +41,7 @@ class Admin::ArticlesController < ApplicationController
 
   def update
     @article = Article.find(params[:id])
-    if @article.update(article_params)
+    if @article.update(article_params_up)
       redirect_to :action =>'index'
     else
       render :action => 'edit'
@@ -44,7 +55,14 @@ class Admin::ArticlesController < ApplicationController
 
   def article_params
     slug12 = chnage_slug(params[:article][:slug])
-    params.require(:article).permit(:title,:content,:catagories_id).merge!({slug: slug12})
+    user_id = current_user.id
+    params.require(:article).permit(:title,:content,:catagories_id,:attachment).merge!({slug: slug12, users_id: user_id})
+  end
+
+  def article_params_up
+    @article = Article.find(params[:id])
+    user_id = current_user.id
+    params.require(:article).permit(:title,:content,:catagories_id,:slug,:attachment).merge!({users_id: user_id})
   end
 
   def chnage_slug(param)

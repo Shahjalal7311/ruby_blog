@@ -9,7 +9,7 @@ gem 'rails', '~> 5.2.4', '>= 5.2.4.2'
 gem 'sqlite3'
 # Use mysql2 as the database for Active Record
 gem "mysql2"
-
+gem 'carrierwave'
 # Use clearance
 gem "clearance"
 # Use Puma as the app server

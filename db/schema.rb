@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_24_091740) do
+ActiveRecord::Schema.define(version: 2020_11_30_090314) do
 
   create_table "articles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title", null: false
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2020_11_24_091740) do
     t.datetime "updated_at", null: false
     t.integer "catagories_id"
     t.integer "users_id"
+    t.string "attachment"
   end
 
   create_table "catagories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -34,6 +35,13 @@ ActiveRecord::Schema.define(version: 2020_11_24_091740) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "users_id"
+  end
+
+  create_table "post_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "post_id"
+    t.string "avatar"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|

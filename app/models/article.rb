@@ -16,5 +16,6 @@
 
 class Article < ApplicationRecord
   belongs_to :catagory, foreign_key: 'catagories_id'
+  mount_uploader :attachment, AttachmentUploader
   validates :title, presence: true
 end
