@@ -37,7 +37,7 @@
                 
                 <div class="form-group">
                   <label>Category</label>
-                  <%= select_tag 'article[catagories_id]', options_from_collection_for_select(@catagories, 'id', 'title', '1'),:class => 'form-control' %>
+                  <%= select_tag 'article[catagories_id]', options_from_collection_for_select(@catagories, 'id', 'title', '1'),:class => 'form-control select2' %>
                 </div>
                 <div class="form-group">
                   <label>Slug</label>

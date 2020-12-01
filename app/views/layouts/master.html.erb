@@ -4,9 +4,6 @@
     <title>Admin</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link rel="stylesheet" href="/vendor/plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="/vendor/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
@@ -16,10 +13,13 @@
     <link rel="stylesheet" href="/vendor/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <link rel="stylesheet" href="/vendor/plugins/daterangepicker/daterangepicker.css">
     <link rel="stylesheet" href="/vendor/plugins/summernote/summernote-bs4.css">
+    <link rel="stylesheet" href="/vendor/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="/vendor/css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <script src="/vendor/plugins/jquery/jquery.min.js"></script>
     <script src="/vendor/plugins/jquery-ui/jquery-ui.min.js"></script>
     <script src="/vendor/plugins/summernote/summernote-bs4.min.js"></script>
+    <script src="/vendor/plugins/select2/js/select2.min.js"></script>
   </head>
 
   <body class="hold-transition sidebar-mini layout-fixed">
@@ -67,5 +67,9 @@
       "autoWidth": false,
       "responsive": true,
     });
+    $(document).ready(function() {
+      $('.select2').select2();
+    });
   </script>
+  
 </html>
