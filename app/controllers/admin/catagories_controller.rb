@@ -40,6 +40,9 @@ class Admin::CatagoriesController < ApplicationController
     redirect_to :action => 'index'
   end
 
+  def update_status
+  end  
+
   def category_params
     params.require(:category).permit(:title, :slug, :content)
   end

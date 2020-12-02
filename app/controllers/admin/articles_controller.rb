@@ -53,6 +53,10 @@ class Admin::ArticlesController < ApplicationController
     redirect_to :action => 'index'
   end
 
+  def update_status
+    layout false
+  end  
+
   def article_params
     slug12 = chnage_slug(params[:article][:slug])
     user_id = current_user.id
