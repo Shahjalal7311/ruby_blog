@@ -4,6 +4,10 @@
     <title>Admin</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    
     <link rel="stylesheet" href="/vendor/plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="/vendor/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
@@ -67,6 +71,9 @@
       "info": true,
       "autoWidth": false,
       "responsive": true,
+    });
+    $(document).ready(function() {
+      $('.select2').select2();
     });
   </script>
   
