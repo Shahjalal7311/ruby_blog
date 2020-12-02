@@ -30,28 +30,8 @@
                 <%end%>
               <%end%>
               <%= form_for @article, url: { action: "update" }, :html => {:multipart => true} do %>
-                <div class="form-group">
-                  <label>Title</label>
-                  <%= text_field 'article' ,'title', :class => 'form-control',:value =>@article.title %>
-                </div>
-                <div class="form-group">
-                  <label>Category</label>
-                  <%= select_tag 'article[catagories_id]', options_from_collection_for_select(@catagories, 'id', 'title', @article.catagories_id),:class => 'form-control select2' %>
-                </div>
-                <div class="form-group">
-                  <label>Slug</label>
-                  <%= text_field 'article','slug', :class => 'form-control', :value =>@article.slug %>
-                </div>
-                <div class="form-group">
-                  <label>Images</label>
-                  <%= file_field 'article','attachment', :class => 'form-control' %>
-                  <img width="100" src="<%= @article.attachment %>" class="img-thumbnail" alt="<%= @article.title %>" />
-                </div>
-                <div class="form-group">
-                  <label>Content</label>
-                  <%= text_area 'article','content',class:'summernote', 'data-provider': :summernote, :value =>@article.content %>
-                </div>
-              <%= submit_tag "Update", class: 'btn btn-block btn-secondary' %>
+                <%= render partial: "form", locals: {article: @article} %>
+                <%= submit_tag "Update", class: 'btn btn-block btn-secondary' %>
               <% end -%>
           </div>
         </div>

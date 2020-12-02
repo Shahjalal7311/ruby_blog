@@ -3,11 +3,12 @@ module ArticlesHelper
     ActionView::Base.full_sanitizer.sanitize(string)
   end
 
-  def Noimage(img)
-    if (img == 'NULL')
-      return 'public/images/avatar.png' 
-    else 
-      return img
+  def checkImages(img)
+    data = img.attachment
+    if(data.nil? || data.to_s.empty?)
+      display_img ='/images/photo1.png'
+    else
+      display_img = data
     end   
   end
 

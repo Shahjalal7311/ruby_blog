@@ -1,0 +1,27 @@
+<div class="form-group">
+  <label>Title</label>
+  <%= text_field 'article' ,'title', :class => 'form-control' %>
+</div>
+<div class="form-group">
+  <label>Category</label>
+  <% if(@article) %>
+    <%= select_tag 'article[catagories_id]', options_from_collection_for_select(@catagories, 'id', 'title', @article.catagories_id),:class => 'form-control select2' %>
+  <%else%>
+    <%= select_tag 'article[catagories_id]', options_from_collection_for_select(@catagories, 'id', 'title', '1'),:class => 'form-control select2' %>
+  <%end%>  
+</div>
+<div class="form-group">
+  <label>Slug</label>
+  <%= text_field 'article','slug', :class => 'form-control' %>
+</div>
+<div class="form-group">
+  <label>Images</label>
+  <%= file_field 'article','attachment', :class => 'form-control' %>
+  <% if(@article) %>
+    <img width="100" src="<%= @article.attachment %>" class="img-thumbnail"/>
+  <%end%>
+</div>
+<div class="form-group">
+  <label>Content</label>
+  <%= text_area 'article','content',class:'summernote', 'data-provider': :summernote %>
+</div>

@@ -22,7 +22,7 @@
           <div class="card">
             <div class="card-header">
               <h3 class="card-title"></h3>
-              <div style="float: right;"><a href="<%= new_admin_article_path %>">Add New</a></div>
+              <div style="float: right;"><a href="<%= new_admin_article_path %>"><i class="fas fa-plus"></i> Add New</a></div>
             </div>
             <div class="card-body">
             <%# <%= debug(@articles) if Rails.env.development? %>
@@ -45,13 +45,12 @@
                     <td><%= article.title %></td>
                     <td width="20%"><%= strip_html_tags(article.slug) %></td>
                     <td>
-                      <img width="50" src="<%= article.attachment %>" class="img-thumbnail" alt="<%= article.title %>" />
+                      <img width="100" src="<%= checkImages(article) %>" class="img-thumbnail" alt="<%= article.title %>" />
                     </td>
                     <td><%= article.catagory.title %></td>
-                    <td><%= article.created_at %></td>
+                    <td><%= article.created_at.strftime("%Y-%m-%d") %></td>
                     <td>
-                      <%= link_to 'Edit', {:action => 'edit', :id => article.id} %>
-                      <%= link_to 'Delete',url_for(action: :destroy,id: article.id),method: :delete, data: {confirm: "Are you sure you want to delete this item?"} %>
+                      <%= render template: "admin/action/action", locals: {action_data: article} %>
                     </td>
                   </tr>
                 <%end%>
