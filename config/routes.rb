@@ -17,7 +17,10 @@ Rails.application.routes.draw do
         post :unpublish
       end
       resources :catagories
-      resources :users
+      resources :users do 
+        get :change_password
+        post :update_passord
+      end  
       # resources :users, controller: "clearance/users" do
       #   resource :password,
       #     controller: "clearance/passwords",
@@ -38,7 +41,10 @@ Rails.application.routes.draw do
         post :publish
         post :unpublish
       end
-      resources :users
+      resources :users do 
+        get :change_password
+        post :update_passord
+      end  
       # resources :users, controller: "clearance/users", only: [:show] do
       #   resource :password,
       #     controller: "clearance/passwords",

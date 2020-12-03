@@ -29,7 +29,7 @@ class Admin::UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user.update(user_params)
+    if @user.update(user_update_params)
       redirect_to :action =>'index'
     else
       render :action => 'edit'
@@ -41,9 +41,37 @@ class Admin::UsersController < ApplicationController
     redirect_to :action => 'index'
   end
 
+  def change_password
+    @user = User.find(params[:user_id])
+  end
+
+  def update_password
+    @user = User.find(params[:user_id])
+    current_password = params[:user][:old_password]
+    user = User.authenticate(@user.email, current_password)
+    if @user && user
+      user.update_attribute(:password, params[:user][:password])
+      flash[:sucess] = "Password successfully changed!"
+      redirect_to :action => 'index'
+    else
+      flash[:danger] = "Your old password was incorrect. Please try again."
+      redirect_to :action =>'change_password'
+    end
+  end
+
   def user_params
     # render json: params
     params.require(:user).permit(:f_name,:l_name,:user_name, :email, :mobile, :password)
+  end
+
+  def user_change_params
+    # render json: params
+    params.require(:user).permit(:password)
+  end
+
+  def user_update_params
+    # render json: params
+    params.require(:user).permit(:f_name,:l_name,:user_name, :email, :mobile)
   end
 
 end
