@@ -7,7 +7,7 @@ class Admin::ArticlesController < ApplicationController
 
   def new
     @articles = Article.new
-    @catagories = Catagory.all
+    @catagories = Catagory.published_status.all
   end
 
   # def create
@@ -36,7 +36,7 @@ class Admin::ArticlesController < ApplicationController
 
   def edit
     @article = Article.find(params[:id])
-    @catagories = Catagory.all
+    @catagories = Catagory.published_status.all
   end
 
   def update
@@ -53,12 +53,24 @@ class Admin::ArticlesController < ApplicationController
     redirect_to :action => 'index'
   end
 
-  def update_status
-    layout false
-  end  
+  def publish
+    @article = Article.find(params[:article_id])
+    if @article 
+      @article.update_column(:status, 1)
+      redirect_to :action => 'index'
+    end
+  end
+
+  def unpublish
+    @article = Article.find(params[:article_id])
+    if @article 
+      @article.update_column(:status, 0)
+      redirect_to :action => 'index'
+    end
+  end
 
   def article_params
-    slug12 = chnage_slug(params[:article][:slug])
+    slug12 = change_slug(params[:article][:slug])
     user_id = current_user.id
     params.require(:article).permit(:title,:content,:catagories_id,:attachment).merge!({slug: slug12, users_id: user_id})
   end
@@ -69,7 +81,7 @@ class Admin::ArticlesController < ApplicationController
     params.require(:article).permit(:title,:content,:catagories_id,:slug,:attachment).merge!({users_id: user_id})
   end
 
-  def chnage_slug(param)
+  def change_slug(param)
     return param.downcase.tr!(" ", "-")
   end
 

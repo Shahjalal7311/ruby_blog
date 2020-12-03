@@ -16,4 +16,5 @@
 class Catagory < ApplicationRecord
   has_many :article
   validates :title, presence: true
+  scope :published_status, -> { where("status = 1") }
 end

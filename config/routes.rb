@@ -12,7 +12,10 @@ Rails.application.routes.draw do
     root to: "admin/dashboards#index", as: :admin_root
     namespace :admin do
       resources :dashboard
-      resources :articles
+      resources :articles, only: [:index, :new, :create, :show, :edit, :update, :destroy] do
+        post :publish
+        post :unpublish
+      end
       resources :catagories
       resources :users
       # resources :users, controller: "clearance/users" do
@@ -27,8 +30,14 @@ Rails.application.routes.draw do
     root to: "admin/dashboards#index", as: :signed_in_root
     namespace :admin do
       resources :dashboard
-      resources :articles
-      resources :catagories
+      resources :articles do
+        post :publish
+        post :unpublish
+      end
+      resources :catagories do
+        post :publish
+        post :unpublish
+      end
       resources :users
       # resources :users, controller: "clearance/users", only: [:show] do
       #   resource :password,

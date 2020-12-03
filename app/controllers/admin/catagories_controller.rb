@@ -40,7 +40,20 @@ class Admin::CatagoriesController < ApplicationController
     redirect_to :action => 'index'
   end
 
-  def update_status
+  def publish
+    @Catagory = Catagory.find(params[:catagory_id])
+    if @Catagory 
+      @Catagory.update_column(:status, 1)
+      redirect_to :action => 'index'
+    end
+  end
+
+  def unpublish
+    @Catagory = Catagory.find(params[:catagory_id])
+    if @Catagory 
+      @Catagory.update_column(:status, 0)
+      redirect_to :action => 'index'
+    end
   end  
 
   def category_params
