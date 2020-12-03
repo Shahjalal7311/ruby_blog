@@ -5,5 +5,5 @@
 <%end%>
 
 <% if(action_data.status === 1)%>
-  <a style="cursor:pointer;" onclick="onUnpublish(<%= action_data.id%>, <%= controller.controller_name %>)"><i class="fa fa-undo"></i> inactive</a>
+  <a style="cursor:pointer;" onclick="onUnpublish(<%= action_data.id%>, '<%= controller.controller_name %>')"><i class="fa fa-undo"></i> inactive</a>
 <%end%>
