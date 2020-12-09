@@ -44,7 +44,13 @@ Rails.application.routes.draw do
       resources :users do 
         get :change_password
         post :update_password
-      end  
+      end
+      resources :user_menus do
+        post :publish
+        post :unpublish
+        get  :link
+        post :update_linkadd
+      end
       # resources :users, controller: "clearance/users", only: [:show] do
       #   resource :password,
       #     controller: "clearance/passwords",
