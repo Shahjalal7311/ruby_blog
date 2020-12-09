@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_30_090314) do
+ActiveRecord::Schema.define(version: 2020_12_09_044624) do
 
   create_table "articles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title", null: false
@@ -40,6 +40,38 @@ ActiveRecord::Schema.define(version: 2020_11_30_090314) do
   create_table "post_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "post_id"
     t.string "avatar"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_menu_actions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "user_menu_id"
+    t.integer "menuType"
+    t.string "actionName"
+    t.string "actionLink"
+    t.integer "orderBy"
+    t.integer "actionStatus", limit: 1, default: 1
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_menus", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "parentMenu"
+    t.string "menuName"
+    t.string "menuLink"
+    t.string "menuIcon"
+    t.integer "orderBy"
+    t.integer "menuStatus", limit: 1, default: 1
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_roles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.integer "menuType"
+    t.text "permission"
+    t.text "actionPermission"
+    t.integer "status", limit: 1, default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
