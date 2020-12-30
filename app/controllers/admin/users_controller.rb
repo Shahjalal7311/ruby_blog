@@ -12,6 +12,7 @@ class Admin::UsersController < ApplicationController
   
   def create
     @user = User.create(user_params)
+    @user_roles = UserRole.all
     if @user.valid?
       redirect_to :action =>'index'
     else
@@ -25,6 +26,7 @@ class Admin::UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    @user_roles = UserRole.all
   end
 
   def update
@@ -61,7 +63,7 @@ class Admin::UsersController < ApplicationController
 
   def user_params
     # render json: params
-    params.require(:user).permit(:f_name,:l_name,:user_name, :email, :mobile, :password)
+    params.require(:user).permit(:user_roles_id, :user_name, :email, :mobile, :password)
   end
 
   def user_change_params
@@ -71,7 +73,7 @@ class Admin::UsersController < ApplicationController
 
   def user_update_params
     # render json: params
-    params.require(:user).permit(:f_name,:l_name,:user_name, :email, :mobile)
+    params.require(:user).permit(:user_roles_id, :user_name, :email, :mobile)
   end
 
 end

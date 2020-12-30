@@ -1,7 +1,7 @@
 <div class="form-group">
   <label>Parent</label>
   <% if(@user_menu) %>
-    <%= select_tag 'user_menu[parentMenu]', options_from_collection_for_select(@menuAll, 'id', 'menuName', @user_menu.parentMenu),:class => 'form-control select2' %>
+    <%= select_tag 'user_menu[parentMenu]', options_from_collection_for_select(@menuAll, 'id', 'menuName', @user_menu.parentMenu),prompt: "Select One",:class => 'form-control select2' %>
   <%else%>
     <%= select_tag 'user_menu[parentMenu]', content_tag(:option,'Select One...',:value=>"")+options_from_collection_for_select(@menuAll, 'id', 'menuName', ''),:class => 'form-control select2' %>
   <%end%>  

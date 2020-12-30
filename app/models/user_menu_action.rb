@@ -9,6 +9,5 @@
 #  updated_at   :datetime         not null
 #
 
-class UserMenu < ApplicationRecord
-  scope :getMenus, -> { where("menuStatus = 1") }
+class UserMenuAction < ApplicationRecord
 end

@@ -49,7 +49,16 @@ Rails.application.routes.draw do
         post :publish
         post :unpublish
         get  :link
+        get  :addlink
+        post :createlink
+        get :addlinkedit
+        patch :updateLinkedit
         post :update_linkadd
+      end
+      resources :user_roles do 
+        get :permission
+        post :publish
+        post :unpublish
       end
       # resources :users, controller: "clearance/users", only: [:show] do
       #   resource :password,

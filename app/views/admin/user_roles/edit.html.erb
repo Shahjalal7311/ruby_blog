@@ -29,8 +29,8 @@
                   <p style="color: red"><%= error %></p>
                 <%end%>
               <%end%>
-              <%= form_for @user_menu, url: { action: "update" }, :html => {:multipart => true} do %>
-                <%= render partial: "form", locals: {user_menu: @user_menu} %>
+              <%= form_for @user_role, url: { action: "update" }, :html => {:multipart => true} do %>
+                <%= render partial: "form", locals: {user_role: @user_role} %>
                 <%= submit_tag "Update", class: 'btn btn-block btn-secondary' %>
               <% end -%>
           </div>

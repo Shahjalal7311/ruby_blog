@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_09_044624) do
+ActiveRecord::Schema.define(version: 2020_12_30_061218) do
 
   create_table "articles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title", null: false
@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(version: 2020_12_09_044624) do
     t.string "l_name"
     t.string "user_name"
     t.string "mobile"
+    t.integer "user_roles_id"
     t.index ["email"], name: "index_users_on_email"
     t.index ["remember_token"], name: "index_users_on_remember_token"
   end

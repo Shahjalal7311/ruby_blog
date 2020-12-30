@@ -31,12 +31,8 @@
               <%end%>
               <%= form_for @user, url: { action: "update" } do %>
                 <div class="form-group">
-                  <label> First Name</label>
-                  <%= text_field 'user' ,'f_name', :class => 'form-control', placeholder:'First Name', :value =>@user.f_name %>
-                </div>
-                <div class="form-group">
-                  <label> Last Name</label>
-                  <%= text_field 'user' ,'l_name', :class => 'form-control', placeholder:'Last Name', :value =>@user.l_name %>
+                  <label>Role</label>
+                  <%= select_tag 'user[user_roles_id]', content_tag(:option,'Select One...',:value=>"")+options_from_collection_for_select(@user_roles, 'id', 'name', @user.user_roles_id),:class => 'form-control' %>
                 </div>
                 <div class="form-group">
                   <label> User Name</label>
