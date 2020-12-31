@@ -438,22 +438,36 @@
   });
 
   $('.menu').click(function(event) {
-      var menuId = $(this).data('id');
-      if(this.checked) {
-        $('.parentMenu_'+menuId).each(function() {
-          this.checked = true; 
-        });
-        $('.childMenu_'+menuId).each(function() {
-          this.checked = true; 
-        });
-      }else{
-        $('.parentMenu_'+menuId).each(function() {
-          this.checked = false; 
-        });
-        $('.childMenu_'+menuId).each(function() {
-          this.checked = false; 
-        });
-      }
-    });
+    var menuId = $(this).data('id');
+    if(this.checked) {
+      $('.parentMenu_'+menuId).each(function() {
+        this.checked = true; 
+      });
+      $('.childMenu_'+menuId).each(function() {
+        this.checked = true; 
+      });
+    }else{
+      $('.parentMenu_'+menuId).each(function() {
+        this.checked = false; 
+      });
+      $('.childMenu_'+menuId).each(function() {
+        this.checked = false; 
+      });
+    }
+  });
+
+    var url = window.location;
+    // for sidebar menu entirely but not cover treeview
+    $('ul.nav-sidebar a').filter(function() {
+      return this.href != url;
+    }).parent().removeClass('menu-open');
+    // for sidebar menu entirely but not cover treeview
+    $('ul.nav-sidebar a').filter(function() {
+      return this.href == url;
+    }).parent().addClass('menu-open');
+    // for treeview
+    $('ul.nav-sidebar a').filter(function() {
+      return this.href == url;
+    }).parentsUntil(".nav-sidebar").addClass('menu-open');
 
 })(jQuery)
