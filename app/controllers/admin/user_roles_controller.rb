@@ -62,6 +62,24 @@ class Admin::UserRolesController < ApplicationController
     # render json: @user_roles.permission
   end
 
+  def permissionUpdate
+    @user_roles = UserRole.find(params[:user_role_id])
+    usermenu = stringToArray(params[:usermenu])
+    usermenuAction = stringToArray(params[:usermenuAction])
+    if @user_roles 
+      @user_roles.update_attributes(:permission => usermenu, :actionPermission => usermenuAction)
+      redirect_to :action => 'index'
+    end
+  end
+
+  def stringToArray(valuSplit)
+    if(valuSplit !=nil)
+      return valuSplit.map(&:to_i).join(',')
+    else
+      return valuSplit
+    end
+  end
+
   def role_params
     params.require(:user_role).permit(:name)
   end

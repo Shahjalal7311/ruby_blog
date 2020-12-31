@@ -1,4 +1,8 @@
 <!-- Main content -->
+<%
+  require 'set'
+  require 'active_support'
+%>
 <div class="content-wrapper">
   <section class="content-header">
     <div class="container-fluid">
@@ -19,6 +23,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
+          <%= form_tag({:action => :permissionUpdate}, :multipart => true) do %>
           <div class="card">
             <div class="card-header">
               <h3 class="card-title pull-left">USER PERMISSION</h3>
@@ -37,22 +42,12 @@
               <hr>
               <div class="row">
                 <% @user_menu.each do |menu| %>
-                <%
-                  if(@user_roles.permission !=nil)
-                    @m = @user_roles.permission.split(',')
-                    if(menu.id.include?@m)
-                      checked = "checked";
-                    end
-                  else
-                    checked = "";
-                  end
-                %>
                 <div class="col-md-2" style="margin-bottom: 12px;">
-                  <input class="parentMenu_<%= menu.id %> menu" type="checkbox" name="usermenu[]" value="<%= menu.id %>"  <%= checked %> data-id="<%= menu.id %>">
+                  <input class="parentMenu_<%= menu.id %> menu" type="checkbox" name="usermenu[]" value="<%= menu.id %>"  <%= rolesMenusChecked(@user_roles.permission, menu.id) %> data-id="<%= menu.id %>">
                   <span><%= menu.menuName %></span>
                   <div style="margin-left: 18px;margin-top: 3px;">
                     <% getUserAction(menu.id).each do |action| %>
-                      <input class="childMenu_<%= action.user_menu_id %>" type="checkbox" name="usermenuAction[]" value="<%= action.id %>" style="margin-bottom: 8px;"><span style="padding-left:10px;"><%= action.actionName %></span> <br>
+                      <input class="childMenu_<%= action.user_menu_id %>" type="checkbox" name="usermenuAction[]" value="<%= action.id %>" <%= rolesMenusChecked(@user_roles.actionPermission, action.id) %> style="margin-bottom: 8px;"><span style="padding-left:10px;"><%= action.actionName %></span> <br>
                     <%end%>
                   </div>
                 </div>
@@ -64,6 +59,7 @@
                 </div>
             </div>
           </div>
+          <% end -%>
         </div>
       </div>
     </div>

@@ -57,6 +57,7 @@ Rails.application.routes.draw do
       end
       resources :user_roles do 
         get :permission
+        post :permissionUpdate
         post :publish
         post :unpublish
       end
