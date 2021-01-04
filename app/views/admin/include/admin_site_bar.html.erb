@@ -17,62 +17,46 @@
           <a href="#" class="d-block"><%= current_user.email %></a>
         </div>
       </div>
-
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <li class="nav-item">
-            <a href="/admin/dashboard" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>dashboard</p>
-            </a>
-          </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
-              <p>Content<i class="fas fa-angle-left right"></i></p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/admin/catagories" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Catagory</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/admin/articles" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Article</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
-              <p>User Managment<i class="fas fa-angle-left right"></i></p>
-            </a>
-            <ul class="nav nav-treeview">
-            <li class="nav-item">
-                <a href="/admin/user_menus" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Menus</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/admin/user_roles" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Roles</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/admin/users" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Users</p>
-                </a>
-              </li>
-            </ul>
-          </li>
+          <%
+          if(getUserRole())
+            getRole = getUserRole()
+            getMenus = getMenusAll()
+            getMenus.each do |menu|
+              menuCheck = rolesDynamicChecked(getRole, menu.id);
+              if(menuCheck)
+                submenu = getSubMenusAll(menu.id) 
+            %>
+              <% if(submenu.count() == 0) %>
+                <li class="nav-item">
+                  <a href="/admin/<%= menu.menuLink %>" class="nav-link">
+                    <i class="nav-icon <%= menu.menuIcon %>"></i>
+                    <p><%= menu.menuName %></p>
+                  </a>
+                </li>
+                <%else%>
+                  <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon <%= menu.menuIcon %>"></i>
+                      <p><%= menu.menuName %><i class="fas fa-angle-left right"></i></p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                      <% submenu.each do |submenu| %>
+                      <li class="nav-item">
+                        <a href="/admin/<%= submenu.menuLink %>" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p><%= submenu.menuName %></p>
+                        </a>
+                      </li>
+                      <%end%>
+                    </ul>
+                  </li>
+                <%end%>
+              <%end%>  
+            <%end%>
+          <%end%>
           <li class="nav-item nav-logout">
             <i class="fas fa-sign-out-alt nav-icon"></i>
             <%= button_to 'Sign out', sign_out_path, method: :delete, class: 'nav-link' %>
