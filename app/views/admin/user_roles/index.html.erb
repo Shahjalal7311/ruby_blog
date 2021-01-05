@@ -48,9 +48,7 @@
                         <%end%>
                       </td>
                       <td>
-                        <a href="/admin/<%= controller.controller_name %>/<%= user_role.id %>/edit"><i class="fas fa-edit"></i></a>
-                        <a href="/admin/<%= controller.controller_name %>/<%= user_role.id %>/permission"><i class="fas fa-lock"></i></a>
-                        <a data-confirm="Are you sure you want to delete this item?" rel="nofollow" data-method="delete" href="/admin/<%= controller.controller_name %>/<%= user_role.id %>"><i class="fas fa-trash-alt"></i></a>
+                        <%= action(user_role.id).html_safe %>
                       </td>
                     </tr>
                   <%end%>

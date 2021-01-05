@@ -50,7 +50,7 @@
                     <td><%= article.catagory.title %></td>
                     <td><%= article.created_at.strftime("%Y-%m-%d") %></td>
                     <td>
-                      <%= render template: "admin/action/action", locals: {action_data: article} %>
+                      <%= action(article.id).html_safe %>
                     </td>
                   </tr>
                 <%end%>

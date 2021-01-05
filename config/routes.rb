@@ -54,6 +54,7 @@ Rails.application.routes.draw do
         get :addlinkedit
         patch :updateLinkedit
         post :update_linkadd
+        post :destroyAction
       end
       resources :user_roles do 
         get :permission

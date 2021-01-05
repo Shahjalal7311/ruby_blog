@@ -43,7 +43,7 @@
                     <td width="20%"><%= strip_html_tags(data.slug) %></td>
                     <td><%= data.created_at.strftime("%Y-%m-%d") %></td>
                     <td>
-                      <%= render template: "admin/action/action", locals: {action_data: data} %>
+                      <%= action(data.id).html_safe %>
                     </td>
                   </tr>
                 <%end%>

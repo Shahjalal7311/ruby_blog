@@ -8,7 +8,13 @@
     %>
     <select class="form-control" name="user_menu[menuType]">
       <option value="">Select One</option>
-      <% @menuAll.each.with_index(1) do |data, index| %>
+      <% @menuAll.each.with_index(1) do |data, index|
+        # if(index == user_menu.menuType)
+        #   selectv = 'selected'
+        # else
+        #   selectv = ''
+        # end
+      %>
         <option value="<%= index %>"><%= data %></option>
       <%end%>
     </select>

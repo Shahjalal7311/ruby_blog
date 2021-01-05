@@ -91,6 +91,11 @@ class Admin::UserMenusController < ApplicationController
     end
   end
 
+  def destroyAction
+    UserMenuAction.find(params[:id]).destroy
+    redirect_to :action => 'link'
+  end
+
   def user_menu_params
     params.require(:user_menu).permit(:parentMenu,:menuName,:menuLink,:menuIcon,:orderBy)
   end
