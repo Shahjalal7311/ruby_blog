@@ -44,12 +44,7 @@
                       <td><%= user_menu.actionLink %></td>
                       <td><%= user_menu.orderBy %></td>
                       <td>
-                        <% if(user_menu.actionStatus === 0)%>
-                          <a style="cursor:pointer;" onclick="onPublish(<%= user_menu.id %>, '<%= controller.controller_name %>')"><i class="fa fa-bullhorn"></i></a>
-                        <%end%>
-                        <% if(user_menu.actionStatus === 1)%>
-                          <a style="cursor:pointer;" onclick="onUnpublish(<%= user_menu.id%>, '<%= controller.controller_name %>')"><i class="fa fa-undo"></i></a>
-                        <%end%>
+                        <%= status(user_menu.id, user_menu.actionStatus).html_safe %>
                       </td>
                       <td>
                         <a href="/admin/<%= controller.controller_name %>/<%= user_menu.id %>/addlinkedit"><i class="fas fa-edit"></i></a>

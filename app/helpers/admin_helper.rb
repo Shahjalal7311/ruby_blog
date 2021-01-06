@@ -71,4 +71,104 @@ module AdminHelper
     end
   end
 
+  def addAction()
+    user_roles_id = current_user.user_roles_id
+    @userRoles = UserRole.where(id: user_roles_id).first()
+    data_link = '';
+    if(@userRoles !=nil && @userRoles.actionPermission !=nil)
+      @rolePermission = @userRoles.actionPermission
+      @routeName = controller.controller_name
+      @userMenus = UserMenu.getMenus.where(menuLink: @routeName).first()
+      if(@userMenus)
+        usermenuActions = UserMenuAction.where(user_menu_id: @userMenus.id)
+        usermenuActions.each do |usermenuAction|
+          a = @rolePermission.split(',')
+          roleId = usermenuAction.id
+          menutype = usermenuAction.menuType
+          checkHas = (a.include?(roleId.to_s)) ? true : false;
+          if(checkHas)
+            if(menutype ==2)
+              data_link += '<a href="/admin/'+controller.controller_name+'/new"><i class="fas fa-plus"></i> Add New</a>'
+            end
+          end
+        end
+      end
+      return data_link
+    end
+  end
+
+  def status(id, status)
+    user_roles_id = current_user.user_roles_id
+    @userRoles = UserRole.where(id: user_roles_id).first()
+    data_link = '';
+    if(@userRoles !=nil && @userRoles.actionPermission !=nil)
+      @rolePermission = @userRoles.actionPermission
+      @routeName = controller.controller_name.to_s
+      @userMenus = UserMenu.getMenus.where(menuLink: @routeName).first()
+      if(@userMenus)
+        usermenuActions = UserMenuAction.where(user_menu_id: @userMenus.id)
+        usermenuActions.each do |usermenuAction|
+          a = @rolePermission.split(',')
+          roleId = usermenuAction.id
+          menutype = usermenuAction.menuType
+          checkHas = (a.include?(roleId.to_s)) ? true : false;
+          if(checkHas)
+            if(menutype ==3)
+              if(status ==1)
+                data_link +='<a style="cursor:pointer;" onclick="onUnpublish('+id.to_s+', '+"'"+controller.controller_name+"'"+')"><i class="fa fa-undo"></i> Published</a>'
+              else
+                data_link += '<a style="cursor:pointer;" onclick="onPublish('+id.to_s+', '+"'"+controller.controller_name+"'"+')"><i class="fa fa-bullhorn"> Draft</i></a>'
+              end
+            end
+          end
+        end
+      end
+      return data_link
+    end
+  end
+
+  def checkContentPermission()
+    user_roles_id = current_user.user_roles_id
+    userRoles = UserRole.where(id: user_roles_id).first()
+    if(userRoles !=nil && userRoles.permission !=nil)
+      rolePermission = userRoles.permission
+      routeName = controller.controller_name.to_s
+      userMenus = UserMenu.getMenus.where(menuLink: routeName).first()
+      if(userMenus)
+        a = rolePermission.split(',')
+        roleId = userMenus.id
+        checkHas = (a.include?(roleId.to_s)) ? true : false;
+        if(checkHas)
+          return true
+        else
+          return false
+        end
+      end
+    end
+  end
+
+  def checkContentPermissioninnerAction()
+    user_roles_id = current_user.user_roles_id
+    @userRoles = UserRole.where(id: user_roles_id).first()
+    if(@userRoles !=nil && @userRoles.actionPermission !=nil)
+      @rolePermission = @userRoles.actionPermission
+      @routeName = controller.controller_name.to_s
+      @userMenus = UserMenu.getMenus.where(menuLink: @routeName).first()
+      if(@userMenus)
+        usermenuActions = UserMenuAction.where(user_menu_id: @userMenus.id)
+        usermenuActions.each do |usermenuAction|
+          a = @rolePermission.split(',')
+          roleId = usermenuAction.id
+          menutype = usermenuAction.menuType
+          checkHas = (a.include?(roleId.to_s)) ? true : false;
+          if(checkHas)
+            return true
+          else
+            return false
+          end
+        end
+      end
+    end
+  end
+
 end

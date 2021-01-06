@@ -1,5 +1,6 @@
 class Admin::CatagoriesController < ApplicationController
   before_action :require_login
+  include AdminHelper
   layout 'master'
   def index
     @catagories = Catagory.all

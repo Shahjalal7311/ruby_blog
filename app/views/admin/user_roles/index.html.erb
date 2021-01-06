@@ -40,12 +40,7 @@
                       <td><%= user_role.id %></td>
                       <td><%= user_role.name %></td>
                       <td>
-                        <% if(user_role.status === 0)%>
-                          <a style="cursor:pointer;" onclick="onPublish(<%= user_role.id %>, '<%= controller.controller_name %>')"><i class="fa fa-bullhorn"></i></a>
-                        <%end%>
-                        <% if(user_role.status === 1)%>
-                          <a style="cursor:pointer;" onclick="onUnpublish(<%= user_role.id%>, '<%= controller.controller_name %>')"><i class="fa fa-undo"></i></a>
-                        <%end%>
+                        <%= status(user_role.id, user_role.status).html_safe %>
                       </td>
                       <td>
                         <%= action(user_role.id).html_safe %>

@@ -46,12 +46,7 @@
                       <td><%= user_menu.menuLink %></td>
                       <td><%= user_menu.orderBy %></td>
                       <td>
-                        <% if(user_menu.menuStatus === 0)%>
-                          <a style="cursor:pointer;" onclick="onPublish(<%= user_menu.id %>, '<%= controller.controller_name %>')"><i class="fa fa-bullhorn"></i></a>
-                        <%end%>
-                        <% if(user_menu.menuStatus === 1)%>
-                          <a style="cursor:pointer;" onclick="onUnpublish(<%= user_menu.id%>, '<%= controller.controller_name %>')"><i class="fa fa-undo"></i></a>
-                        <%end%>
+                        <%= status(user_menu.id, user_menu.menuStatus).html_safe %>
                       </td>
                       <td>
                         <%= action(user_menu.id).html_safe %>  
