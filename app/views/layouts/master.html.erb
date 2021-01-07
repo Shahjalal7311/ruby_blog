@@ -32,11 +32,7 @@
     <div class="wrapper">
       <%= render template: 'admin/include/admin_nav' %>
       <%= render template: 'admin/include/admin_site_bar' %>
-      <% if(checkContentPermission()) %>
-        <%= yield %>
-      <%else%>
-        <%= render template: 'admin/include/show_permission_error' %>
-      <%end%>
+      <%= yield %>
       <%= render template: 'admin/include/admin_footer' %>
     </div>
   </body>

@@ -1,5 +1,8 @@
 class Admin::UserMenusController < ApplicationController
   before_action :require_login
+  before_action :checkContentPermissioninnerAction
+  before_action :checkContentPermission
+  
   layout 'master'
   def index
     @user_menus = UserMenu.all

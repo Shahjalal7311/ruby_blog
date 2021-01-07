@@ -10,4 +10,5 @@
 #
 
 class UserMenuAction < ApplicationRecord
+  scope :getActionMenus, -> { where("actionStatus = 1") }
 end

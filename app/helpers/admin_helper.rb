@@ -21,12 +21,11 @@ module AdminHelper
   end
 
   def rolesDynamicChecked(array_val,menu_id)
-    if(array_val !=nil)
+    if(array_val !=nil && (array_val))
       a = array_val.split(',')
       return (a.include?(menu_id.to_s)) ? true : false
     else
-      errors.add(:base, "You don't have permission this")
-      throw(:abort)
+      return false
     end 
   end
 
@@ -124,50 +123,6 @@ module AdminHelper
         end
       end
       return data_link
-    end
-  end
-
-  def checkContentPermission()
-    user_roles_id = current_user.user_roles_id
-    userRoles = UserRole.where(id: user_roles_id).first()
-    if(userRoles !=nil && userRoles.permission !=nil)
-      rolePermission = userRoles.permission
-      routeName = controller.controller_name.to_s
-      userMenus = UserMenu.getMenus.where(menuLink: routeName).first()
-      if(userMenus)
-        a = rolePermission.split(',')
-        roleId = userMenus.id
-        checkHas = (a.include?(roleId.to_s)) ? true : false;
-        if(checkHas)
-          return true
-        else
-          return false
-        end
-      end
-    end
-  end
-
-  def checkContentPermissioninnerAction()
-    user_roles_id = current_user.user_roles_id
-    @userRoles = UserRole.where(id: user_roles_id).first()
-    if(@userRoles !=nil && @userRoles.actionPermission !=nil)
-      @rolePermission = @userRoles.actionPermission
-      @routeName = controller.controller_name.to_s
-      @userMenus = UserMenu.getMenus.where(menuLink: @routeName).first()
-      if(@userMenus)
-        usermenuActions = UserMenuAction.where(user_menu_id: @userMenus.id)
-        usermenuActions.each do |usermenuAction|
-          a = @rolePermission.split(',')
-          roleId = usermenuAction.id
-          menutype = usermenuAction.menuType
-          checkHas = (a.include?(roleId.to_s)) ? true : false;
-          if(checkHas)
-            return true
-          else
-            return false
-          end
-        end
-      end
     end
   end
 

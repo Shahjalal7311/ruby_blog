@@ -1,6 +1,8 @@
 class Admin::CatagoriesController < ApplicationController
   before_action :require_login
-  include AdminHelper
+  before_action :checkContentPermissioninnerAction
+  before_action :checkContentPermission
+  
   layout 'master'
   def index
     @catagories = Catagory.all
