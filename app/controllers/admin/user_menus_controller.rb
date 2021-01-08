@@ -1,7 +1,7 @@
 class Admin::UserMenusController < ApplicationController
   before_action :require_login
-  before_action :checkContentPermissioninnerAction
-  before_action :checkContentPermission
+  before_action :hasMenuPermission
+  before_action :hasMenuActionPermission
   
   layout 'master'
   def index
