@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   include Clearance::Controller
   layout 'master'
   
-  def hasMenuPermission()
+  def hasMenuActionPermission()
     user_roles_id = current_user.user_roles_id
     userRoles = UserRole.where(id: user_roles_id).first()
     if(userRoles !=nil && userRoles.actionPermission !=nil)
@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def hasMenuActionPermission()
+  def hasMenuPermission()
     user_roles_id = current_user.user_roles_id
     userRoles = UserRole.where(id: user_roles_id).first()
     if(userRoles !=nil && userRoles.permission !=nil)
