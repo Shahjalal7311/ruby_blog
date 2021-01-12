@@ -456,18 +456,12 @@
     }
   });
 
+  $(document).ready(function() {
     var url = window.location;
-    // for sidebar menu entirely but not cover treeview
-    $('ul.nav-sidebar a').filter(function() {
-      return this.href != url;
-    }).parent().removeClass('menu-open');
-    // for sidebar menu entirely but not cover treeview
-    $('ul.nav-sidebar a').filter(function() {
-      return this.href == url;
-    }).parent().addClass('menu-open');
-    // for treeview
-    $('ul.nav-sidebar a').filter(function() {
-      return this.href == url;
-    }).parentsUntil(".nav-sidebar").addClass('menu-open');
+    $('.has-treeview li a[href="' + url + '"]').parent().addClass('menu-open');
+    $('.has-treeview li a').filter(function() {
+        return this.href == url;
+    }).parent().parent().parent().addClass('menu-open');
+  });
 
 })(jQuery)

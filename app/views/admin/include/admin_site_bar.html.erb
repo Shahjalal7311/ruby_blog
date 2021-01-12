@@ -20,14 +20,14 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <%
-            if(getUserRole() !=nil)
-              getRole = getUserRole()
-              getMenus = getMenusAll()
-              getMenus.each do |menu|
-              menuCheck = rolesDynamicChecked(getRole, menu.id);
-              if(menuCheck)
-                submenu = getSubMenusAll(menu.id) 
+            <%
+              if(getUserRole() !=nil)
+                getRole = getUserRole()
+                getMenus = getMenusAll()
+                getMenus.each do |menu|
+                menuCheck = rolesDynamicChecked(getRole, menu.id);
+                if(menuCheck)
+                  submenu = getSubMenusAll(menu.id) 
             %>
               <% if(submenu.count() == 0) %>
                 <li class="nav-item">
