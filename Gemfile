@@ -37,6 +37,25 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+# Firebase
+gem 'jwt'
+gem 'fcm'
+# APNS
+gem 'grocer', require: false
+# Job
+gem 'delayed_job_active_record'
+gem 'daemons'
+# Image Processing
+gem 'data_uri'
+gem 'mini_magick'
+# Location Import or something
+gem 'aws-sdk-s3'
+gem 'whenever', require: false
+gem 'exponent-server-sdk'
+gem 'hashie'
+gem 'cancancan', '~> 2.0'
+gem 'ltsv_log_formatter'
+gem 'dotenv-rails'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
@@ -53,6 +72,11 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+
+  gem "capistrano", "~> 3.8"
+  gem 'capistrano-rails', '~> 1.2'
+  gem 'capistrano3-puma'
+  gem 'capistrano3-delayed-job', '~> 1.0'
 end
 
 group :test do
