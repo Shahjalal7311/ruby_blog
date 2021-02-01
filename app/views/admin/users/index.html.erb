@@ -26,6 +26,19 @@
             </div>
             <div class="card-body">
             <%# <%= debug(@users) if Rails.env.development? %>
+              <form>
+                <div class="row">
+                  <div class="col">
+                    <input name="user_name" type="text" class="form-control" placeholder="User Name">
+                  </div>
+                  <div class="col">
+                    <input name="email" type="text" class="form-control" placeholder="Email">
+                  </div>
+                  <div class="col">
+                    <input type="button" class="btn btn-block btn-secondary users_btn" Value="Search By">
+                  </div>
+                </div>
+              </form>
               <table id="article_data" class="table table-bordered table-hover data_table">
                 <thead>
                   <tr>
@@ -56,4 +69,20 @@
       </div>
     </div>  
   </section>
-</div>        
+</div>
+<script>
+  $(document).ready(function (e) {
+    $(".users_btn").click(function(){
+      var url = '/admin/users';
+      var user_name = $('input[name="user_name"]').val();
+      if(user_name){
+        url +='?user_name='+user_name;
+      }
+      var email = $('select[name="email"]').val();
+      if(email){
+        url += '&email='+email;
+      }
+      location = url;
+     });
+  });
+</script>   

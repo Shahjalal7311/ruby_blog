@@ -25,6 +25,20 @@
               <div style="float: right;"><%= addAction().html_safe %></div>
             </div>
             <div class="card-body">
+            <form>
+              <div class="row">
+                <div class="col">
+                  <input name="title" type="text" class="form-control" placeholder="Articale Title">
+                </div>
+                <div class="col">
+                  <input name="slug" type="text" class="form-control" placeholder="Slug">
+                </div>
+                <div class="col">
+                  <input type="button" class="btn btn-block btn-secondary article_btn" Value="Search By">
+                </div>
+              </div>
+            </form>
+            <br>
             <%# <%= debug(@articles) if Rails.env.development? %>
               <table id="article_data" class="table table-bordered table-hover data_table">
                 <thead>
@@ -35,6 +49,7 @@
                     <th>Images</th>
                     <th>Category</th>
                     <th>Create Date</th>
+                    <th>Status</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -50,6 +65,9 @@
                     <td><%= article.catagory.title %></td>
                     <td><%= article.created_at.strftime("%Y-%m-%d") %></td>
                     <td>
+                      <%= status(article.id, article.status).html_safe %>
+                    </td>
+                    <td>
                       <%= action(article.id).html_safe %>
                     </td>
                   </tr>
@@ -64,3 +82,19 @@
   </section>
 </div>
 <%= render template: "admin/action/action_js" %>
+<script>
+  $(document).ready(function (e) {
+    $(".article_btn").click(function(){
+      var url = '/admin/articles?title=';
+      var title = $('input[name="title"]').val();
+      if(title){
+        url +=title;
+      }
+      var slug = $('input[name="slug"]').val();
+      if(slug){
+        url += '&slug='+slug;
+      }
+      location = url;
+     });
+  });
+</script>

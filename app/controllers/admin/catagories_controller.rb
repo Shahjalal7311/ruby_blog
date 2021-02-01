@@ -5,7 +5,19 @@ class Admin::CatagoriesController < ApplicationController
   
   layout 'master'
   def index
-    @catagories = Catagory.all
+    query = Catagory
+    if(current_user.id ==1)
+      query = query.all
+    else
+      query = query.where("users_id=?", "#{current_user.id}")
+    end
+    if(params[:title])
+      query = query.where("title LIKE ?", "%#{params[:title]}%")
+    end
+    if(params[:status])
+      query = query.where("status LIKE ?", "%#{params[:status]}%")
+    end
+    @catagories = query
   end
 
   def new
@@ -60,7 +72,8 @@ class Admin::CatagoriesController < ApplicationController
   end  
 
   def category_params
-    params.require(:category).permit(:title, :slug, :content)
+    user_id = current_user.id
+    params.require(:category).permit(:title, :slug, :content).merge!({users_id: user_id})
   end
 
 end

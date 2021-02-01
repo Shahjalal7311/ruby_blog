@@ -25,6 +25,23 @@
               <div style="float: right;"><%= addAction().html_safe %></div>
             </div>
             <div class="card-body">
+              <form>
+                <div class="row">
+                  <div class="col">
+                    <input name="title" type="text" class="form-control" placeholder="Title">
+                  </div>
+                  <div class="col">
+                    <select name="status" class="form-control" >
+                      <option value="">Select One</option>
+                      <option value="0">Draft</option>
+                      <option value="1">Published</option>
+                    </select>
+                  </div>
+                  <div class="col">
+                    <input type="button" class="btn btn-block btn-secondary catagories_btn" Value="Search By">
+                  </div>
+                </div>
+              </form>
               <table id="catagorys_data" class="table table-bordered table-hover data_table">
                 <thead>
                   <tr>
@@ -32,6 +49,7 @@
                     <th>Title</th>
                     <th>Slug</th>
                     <th>Create Date</th>
+                    <th>Status</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -42,6 +60,9 @@
                     <td><%= data.title %></td>
                     <td width="20%"><%= strip_html_tags(data.slug) %></td>
                     <td><%= data.created_at.strftime("%Y-%m-%d") %></td>
+                    <td>
+                      <%= status(data.id, data.status).html_safe %>
+                    </td>
                     <td>
                       <%= action(data.id).html_safe %>
                     </td>
@@ -55,4 +76,20 @@
       </div>
     </section>
 </div>
+<script>
+  $(document).ready(function (e) {
+    $(".catagories_btn").click(function(){
+      var url = '/admin/catagories';
+      var title = $('input[name="title"]').val();
+      if(title){
+        url +='?title='+title;
+      }
+      var status = $('select[name="status"]').val();
+      if(status){
+        url += '&status='+status;
+      }
+      location = url;
+     });
+  });
+</script>
 <%= render template: "admin/action/action_js" %>

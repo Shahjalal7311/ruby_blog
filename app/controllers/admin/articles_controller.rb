@@ -5,12 +5,27 @@ class Admin::ArticlesController < ApplicationController
   
   layout 'master'
   def index
-    @articles = Article.joins(:catagory)
+    query = Article.joins(:catagory)
+    if(current_user.id !=1)
+      query = query.where("articles.users_id=?", "#{current_user.id}")
+    end
+    if(params[:title])
+      query = query.where("articles.title LIKE ?", "%#{params[:title]}%")
+    end
+    if(params[:slug])
+      slug = change_slug(params[:slug])
+      query = query.where("articles.slug LIKE ?", "%#{params[:slug]}%")
+    end
+    @articles = query;
   end
 
   def new
     @articles = Article.new
-    @catagories = Catagory.published_status.all
+    if(current_user.id ==1)
+      @catagories = Catagory.published_status.all
+    else
+      @catagories = Catagory.published_status.where("users_id=?", "#{current_user.id}")
+    end
   end
 
   # def create
@@ -39,7 +54,11 @@ class Admin::ArticlesController < ApplicationController
 
   def edit
     @article = Article.find(params[:id])
-    @catagories = Catagory.published_status.all
+    if(current_user.id ==1)
+      @catagories = Catagory.published_status.all
+    else
+      @catagories = Catagory.published_status.where("users_id=?", "#{current_user.id}")
+    end
   end
 
   def update

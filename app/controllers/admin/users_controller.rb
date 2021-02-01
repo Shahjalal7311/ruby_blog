@@ -6,7 +6,14 @@ class Admin::UsersController < ApplicationController
   layout 'master'
 
   def index
-    @users = User.all
+    query = User.all
+    if(params[:user_name])
+      query = query.where("user_name LIKE ?", "%#{params[:user_name]}%")
+    end
+    if(params[:email])
+      query = query.where("email LIKE ?", "%#{params[:email]}%")
+    end
+    @users = query
   end
 
   def addnew
