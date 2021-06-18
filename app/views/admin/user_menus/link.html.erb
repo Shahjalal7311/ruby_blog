@@ -1,0 +1,64 @@
+<!-- Main content -->
+<div class="content-wrapper">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>MANAGE USERS Action</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">User Menu</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title"></h3>
+              <div style="float: right;"><a href="/admin/user_menus/<%= @id %>/addlink"><i class="fas fa-plus"></i> Add New</a></div>
+            </div>
+            <div class="card-body">
+              <table id="article_data" class="table table-bordered table-hover data_table">
+                <thead>
+                  <tr>
+                    <th>#ID</th>
+                    <th>Name</th>
+                    <th>Link</th>
+                    <th>Order</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @user_view_menus.each do |user_menu| %>
+                    <tr>
+                      <td><%= user_menu.id %></td>
+                      <td><%= user_menu.actionName %></td>
+                      <td><%= user_menu.actionLink %></td>
+                      <td><%= user_menu.orderBy %></td>
+                      <td>
+                        <%= status(user_menu.id, user_menu.actionStatus).html_safe %>
+                      </td>
+                      <td>
+                        <a href="/admin/<%= controller.controller_name %>/<%= user_menu.id %>/addlinkedit"><i class="fas fa-edit"></i></a>
+                        <a data-confirm="Are you sure you want to delete this item?" rel="nofollow" data-method="delete" href="/admin/<%= controller.controller_name %>/destroyAction/<%= user_menu.id %>"><i class="fas fa-trash-alt"></i></a>
+                      </td>
+                    </tr>
+                  <%end%>
+                </tbody>
+              </table>  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>  
+  </section>
+</div>
+<%= render template: "admin/action/action_js" %>

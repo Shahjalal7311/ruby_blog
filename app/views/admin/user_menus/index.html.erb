@@ -1,0 +1,65 @@
+<!-- Main content -->
+<div class="content-wrapper">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>MANAGE USERS Menus</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">User Menu</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title"></h3>
+              <div style="float: right;"><a href="<%= new_admin_user_menu_path %>"><i class="fas fa-plus"></i> Add New</a></div>
+            </div>
+            <div class="card-body">
+              <table id="article_data" class="table table-bordered table-hover data_table">
+                <thead>
+                  <tr>
+                    <th>#ID</th>
+                    <th>Menu</th>
+                    <th>Parent</th>
+                    <th>Link</th>
+                    <th>Order</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @user_menus.each do |user_menu| %>
+                    <tr>
+                      <td><%= user_menu.id %></td>
+                      <td><%= user_menu.menuName %></td>
+                      <td><%= user_menu.parentMenu %></td>
+                      <td><%= user_menu.menuLink %></td>
+                      <td><%= user_menu.orderBy %></td>
+                      <td>
+                        <%= status(user_menu.id, user_menu.menuStatus).html_safe %>
+                      </td>
+                      <td>
+                        <%= action(user_menu.id).html_safe %>  
+                      </td>
+                    </tr>
+                  <%end%>
+                </tbody>
+              </table>  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>  
+  </section>
+</div>
+<%= render template: "admin/action/action_js" %>

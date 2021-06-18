@@ -1,0 +1,28 @@
+<script>
+  function onPublish(id, controlerName) {
+    var res = confirm('Are you sure to publish this item?');
+    const metaCsrf = document.querySelector("meta[name='csrf-token']");
+    const csrfToken = metaCsrf.getAttribute('content');
+    url = '/admin/'+controlerName+'/'+id+'/publish'
+    $.ajax({ url: url,
+      type: 'POST',
+      beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+      data: 'id=' + id,
+      success: function(response) {
+        $('#someDiv').html(response);
+      }
+    });
+  }
+  function onUnpublish(id, controlerName) {
+    var res = confirm('Are you sure to unpublish this item?');
+    url = '/admin/'+controlerName+'/'+id+'/unpublish'
+    $.ajax({ url: url,
+      type: 'POST',
+      beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+      data: 'id=' + id,
+      success: function(response) {
+        $('#someDiv').html(response);
+      }
+    });
+  }
+</script> 
