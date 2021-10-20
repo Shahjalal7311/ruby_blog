@@ -41,10 +41,14 @@ class Admin::ArticlesController < ApplicationController
   #   end  
   # end
   def create
+    #intences new object for a from paramater
     @article = Article.new(article_params)
+    #Save the object 
     if @article.save
+      #if save succeds, redirect to the index
       redirect_to :action =>'index'
     else
+      #if save failed, redisplay form
       redirect_to :action =>'new'
     end
   end
@@ -91,20 +95,21 @@ class Admin::ArticlesController < ApplicationController
     end
   end
 
-  def article_params
-    slug12 = change_slug(params[:article][:slug])
-    user_id = current_user.id
-    params.require(:article).permit(:title,:content,:catagories_id,:attachment).merge!({slug: slug12, users_id: user_id})
-  end
+  private 
+    def article_params
+      slug12 = change_slug(params[:article][:slug])
+      user_id = current_user.id
+      params.require(:article).permit(:title,:content,:catagories_id,:attachment).merge!({slug: slug12, users_id: user_id})
+    end
 
-  def article_params_up
-    @article = Article.find(params[:id])
-    user_id = current_user.id
-    params.require(:article).permit(:title,:content,:catagories_id,:slug,:attachment).merge!({users_id: user_id})
-  end
+    def article_params_up
+      @article = Article.find(params[:id])
+      user_id = current_user.id
+      params.require(:article).permit(:title,:content,:catagories_id,:slug,:attachment).merge!({users_id: user_id})
+    end
 
-  def change_slug(param)
-    return param.downcase.tr!(" ", "-")
-  end
+    def change_slug(param)
+      return param.downcase.tr!(" ", "-")
+    end
 
 end

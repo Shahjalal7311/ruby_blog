@@ -19,8 +19,10 @@
       </div>
       <!-- Sidebar Menu -->
       <nav class="mt-2">
+        <%# <%= debug(setclass) if Rails.env.development? %>
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <%
+              
               if(getUserRole() !=nil)
                 getRole = getUserRole()
                 getMenus = getMenusAll()
@@ -37,7 +39,14 @@
                   </a>
                 </li>
                 <%else%>
-                  <li class="nav-item has-treeview">
+                  <%
+                    if(controller.controller_name == menu.menuName)
+                      setclass='menu-open'
+                    else
+                      setclass = ''
+                    end  
+                  %>
+                  <li class="nav-item has-treeview <%= setclass %>">
                     <a href="#" class="nav-link">
                       <i class="nav-icon <%= menu.menuIcon %>"></i>
                       <p><%= menu.menuName %><i class="fas fa-angle-left right"></i></p>

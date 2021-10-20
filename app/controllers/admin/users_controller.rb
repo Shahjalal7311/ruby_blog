@@ -16,8 +16,9 @@ class Admin::UsersController < ApplicationController
     @users = query
   end
 
-  def addnew
+  def new
     @users = User.new
+    @user_roles = UserRole.all
   end
   
   def create
